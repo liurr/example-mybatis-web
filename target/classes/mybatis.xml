@@ -3,11 +3,23 @@
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
- 	<!--给实体类起一个别名 User-->  
+	<!-- 配置缓存设置 -->
+	<settings>
+		<setting name="cacheEnabled" value="false"/>
+	</settings>
+	
+ 	<!--配置model别名-->  
     <typeAliases>  
         <typeAlias type="com.ilucky.mybatis2.model.User" alias="User" />  
-    </typeAliases> 
+        <typeAlias type="com.ilucky.mybatis2.model.UserSay" alias="UserSay" />  
+    </typeAliases>  
     
+    <!--加载mapper文件 -->  
+    <mappers>
+         <mapper resource="com/ilucky/mybatis2/mapper/UserMapper.xml" />
+         <mapper resource="com/ilucky/mybatis2/mapper/UserSayMapper.xml" />
+    </mappers>
+
     <!-- 配置数据库参数 -->
     <environments default="development">
         <environment id="development">
@@ -20,9 +32,4 @@
             </dataSource>
         </environment>
     </environments>
-    
-    <!--装载xml,相当于把dao的实现装载进来 -->  
-    <mappers>
-        <mapper resource="com/ilucky/mybatis2/mapper/UserMapper.xml" />
-    </mappers>
 </configuration>

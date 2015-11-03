@@ -1,16 +1,17 @@
-package com.ilucky.mybatis2.service;
+package com.ilucky.mybatis2.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.ilucky.mybatis2.service.UserSayService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ilucky.mybatis2.mapper.UserSayMapper;
+import com.ilucky.mybatis2.dao.UserSayDao;
 import com.ilucky.mybatis2.model.UserSay;
 
 /**
@@ -24,7 +25,7 @@ public class UserSayImpl implements UserSayService {
 	private static Logger logger = Logger.getLogger(UserSayImpl.class);
 	
 	@Autowired
-	private UserSayMapper userSayMapper;
+	private UserSayDao userSayMapper;
 	
 	@Override
 	public void createUserSayList(List<UserSay> userSayList) {

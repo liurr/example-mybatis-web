@@ -49,5 +49,16 @@ mybatis入门上手非常快,易学易用,是开发项目的一个不错的选�
 
 
 11.底层源码分析.
-   
+
+
+
+1、 web.xml配置
+<context-param>
+    <param-name>webAppRootKey</param-name>
+    <param-value>webapp.root</param-value>
+</context-param>
+"webapp.root"这个字符串可以随便写任何字符串，如果不配置默认值是"webapp.root"。
+
+可以用System.getProperty("webapp.root")来动态获项目的运行路径。
+一般返回结果例如：/usr/local/tomcat6/webapps/项目名
 

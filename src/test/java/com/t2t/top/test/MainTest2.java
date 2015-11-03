@@ -1,4 +1,4 @@
-package com.ilucky.mybatis2;
+package com.t2t.top.test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +29,7 @@ public class MainTest2 {
 		message.put("sex", "true");
 		message.put("birthday", "1980-08-08");
 		message.put("userType", "COMMON");
-		Object result = RestClient.post("http://localhost:8080/mybatis-util2/userController/createUser.mvc", message);
+		Object result = RestClient.post("http://localhost:8080/mybatis-util2/userController/createUser", message);
 		logger.info(result);
 	}
 	
@@ -41,20 +41,20 @@ public class MainTest2 {
 		message.put("sex", "false");
 		message.put("birthday", "1980-08-09");
 		message.put("userType", "SUPER");
-		Object result = RestClient.post("http://localhost:8080/mybatis-util2/userController/modifyUser.mvc", message);
+		Object result = RestClient.post("http://localhost:8080/mybatis-util2/userController/modifyUser", message);
 		logger.info(result);
 	}
 	
 	private static void testDeleteUser() {
 		Map<String, Object> message = new HashMap<String, Object>();
 		message.put("id", "531bf8795b6644c08be67e3ef2b79177,d0fb727f41eb4d36b713b91ce324d3e7");
-		Object result = RestClient.post("http://localhost:8080/mybatis-util2/userController/deleteUser.mvc", message);
+		Object result = RestClient.post("http://localhost:8080/mybatis-util2/userController/deleteUser", message);
 		logger.info(result);
 	}
 	
 	private static void testGetUserListByPage() {
 		Map<String, Object> message = new HashMap<String, Object>();
-		Object result = RestClient.post("http://localhost:8080/mybatis-util2/userController/getUserListByPage.mvc", message);
+		Object result = RestClient.post("http://localhost:8080/mybatis-util2/userController/getUserListByPage", message);
 		logger.info(result);
 	}
 }

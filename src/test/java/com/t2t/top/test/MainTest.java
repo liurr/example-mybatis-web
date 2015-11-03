@@ -1,4 +1,4 @@
-package com.ilucky.mybatis2;
+package com.t2t.top.test;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -74,7 +74,7 @@ public class MainTest {
 		//testTransaction2();
 		
 		//查询单个对象.
-		//报错:A query was run and no Result Maps were found for the Mapped Statement 'com.ilucky.mybatis.mapper.UserMapper.getUser'.  
+		//报错:A query was run and no Result Maps were found for the Mapped Statement 'com.ilucky.mybatis.mapper.UserDao.getUser'.
 		//It's likely that neither a Result Type nor a Result Map was specified.
 		//mybatis针对查询语句,必须指定返回类型,通过resultType或resultMap指定,resultType和resultMap的区别是什么呢?稍后会做说明.
 		//解决方法:添加resultType="User", 即<select id="getUser"  resultType="User">
@@ -153,7 +153,7 @@ public class MainTest {
 	 */
 	public static boolean initEnv() {
 		try {
-			context = new ClassPathXmlApplicationContext("spring.xml");
+			context = new ClassPathXmlApplicationContext("spring/spring-core.xml");
 			PropertyConfigurator.configure("src/main/resources/log4j.properties");
 			logger.info("初始化环境成功");
 			return true;

@@ -1,0 +1,87 @@
+docker ps -a
+docker commit a3b6cceb598d ubuntu/bigdata
+9617dc57db242947c211bdf1a7fea4b0047e5ee1913b55b246d94b396d82e5e6
+docker stop a3b6cceb598d
+docker rm a3b6cceb598d
+
+docker run --name bigdata -i -t -p 50001:22 ubuntu/bigdata
+/etc/init.d/ssh start
+
+
+ubuntu/bigdata
+
+ssh root@172.17.0.2 
+apt-get install vim
+
+docker attach ubuntu/bigdata
+
+
+centos/mysql
+centos/redis
+centos/web
+
+1. run【创建一个容器】
+docker run -i -t centos:latest /bin/bash
+[root@w22 ~]# docker run -i -t --name centos-mysql centos:centos6 /bin/bash
+[root@w22 ~]# docker run -i -t --name centos-mysql centos:latest /bin/bash
+
+2. ssh【安装ssh】
+[root@a491a4a73633 /]# yum install openssh-server -y
+[root@a491a4a73633 /]# 编辑sshd的配置文件/etc/ssh/sshd_config，将其中UsePAM参数设置成“no”
+[root@a491a4a73633 /]# service sshd start
+[root@a491a4a73633 /]# chkconfig sshd on
+[root@a491a4a73633 /]# passwd
+
+useradd tss
+echo 'tss:tss' | chpasswd
+yum install sudo    <--安装sudo软件包
+visudo              <--编辑sudoers，添加下面的行到文件里 
+admin   ALL=(ALL)       ALL
+
+3. exec【连接容器】
+[root@w22 ~]# docker exec -it e2fa252cf4b7 /bin/bash
+
+[root@a491a4a73633 /]# chkconfig iptables off【关闭防火墙】
+
+4. ssh方式连接容器
+[root@w22 ~]# ssh tss@172.17.0.1 [tss]
+[root@w22 ~]# ssh 172.17.0.1  [root]
+
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
+a491a4a73633        centos:centos6      "/bin/bash"         39 seconds ago      Up 38 seconds                                  centos-mysql       【172.17.0.2】 
+e2fa252cf4b7        centos:centos6      "/bin/bash"         4 days ago          Exited (0) 5 minutes ago                       centos-ssh    【172.17.0.1】
+
+----------------------------------
+http://www.kongxx.info/blog/?p=57
+Docker创建支持ssh
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that the RSA host key has just been changed.
+The fingerprint for the RSA key sent by the remote host is
+21:24:59:ba:53:d7:51:a2:12:13:40:09:53:03:5b:e6.
+Please contact your system administrator.
+Add correct host key in /home/cmccpay/.ssh/known_hosts to get rid of this message.
+Offending key in /home/cmccpay/.ssh/known_hosts:11
+RSA host key for 10.202.76.27 has changed and you have requested strict checking.
+Host key verification failed.
+删除宿主机的
+[root@w22 ~]# rm -rf ~/.ssh/known_hosts
+
+
+
+[root@w22 ~]# docker tag 5594e032c305 centos/mysql:5.5
+[root@w22 ~]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+centos/mysql        5.5                 5594e032c305        2 minutes ago       343.6 MB
+
+[root@w22 ~]# docker run --name db-mysql -d -t -p 33061:3306 centos/mysql:5.5 /bin/bash
+[root@w22 ~]# docker run --name db-redis -d -t -p 63791:6379 centos/redis:2.3 /bin/bash
+ 
+
+docker run --net host --name centos-simple -d -t centos:centos6 python -m SimpleHTTPServer
+http://192.168.72.22:8000/

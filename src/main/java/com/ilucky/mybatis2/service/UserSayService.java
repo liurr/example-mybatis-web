@@ -8,7 +8,7 @@ import com.ilucky.mybatis2.model.UserSay;
  * @author IluckySi
  * @since 20151014
  */
-public interface UserSayService {
+public interface UserSayService extends BaseService {
 
 	/**
 	 * 创建UserSay集合
