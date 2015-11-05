@@ -7,18 +7,13 @@
 	<settings>
 		<setting name="cacheEnabled" value="false"/>
 	</settings>
-	
- 	<!--配置model别名-->  
-    <typeAliases>  
-        <typeAlias type="com.ilucky.mybatis2.model.User" alias="User" />  
-        <typeAlias type="com.ilucky.mybatis2.model.UserSay" alias="UserSay" />  
-    </typeAliases>  
-    
-    <!--加载mapper文件 -->  
-    <mappers>
-         <mapper resource="com/ilucky/mybatis2/mapper/UserMapper.xml" />
-         <mapper resource="com/ilucky/mybatis2/mapper/UserSayMapper.xml" />
-    </mappers>
+
+
+    <!--配置model别名-->
+    <typeAliases>
+        <typeAlias type="com.ilucky.mybatis2.model.User" alias="User" />
+        <typeAlias type="com.ilucky.mybatis2.model.UserSay" alias="UserSay" />
+    </typeAliases>
 
     <!-- 配置数据库参数 -->
     <environments default="development">
@@ -26,10 +21,18 @@
             <transactionManager type="JDBC" />
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis?useUnicode=true&amp;characterEncoding=utf8"/>
                 <property name="username" value="root" />
-                <property name="password" value="mysql" />
+                <property name="password" value="root" />
             </dataSource>
         </environment>
     </environments>
+
+    
+    <!--加载mapper文件 -->  
+    <mappers>
+         <mapper resource="com/ilucky/mybatis2/dao/UserMapper.xml" />
+         <mapper resource="com/ilucky/mybatis2/dao/UserSayMapper.xml" />
+    </mappers>
+
 </configuration>

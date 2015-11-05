@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ilucky.mybatis2.model.User;
@@ -26,30 +27,13 @@ public class MainTest3 {
     public static UserService userService;
     public static UserSayService userSayService;
 
-    public static void main(String[] args) {
-        //初始化环境.
-        if (!initEnv()) {
-            return;
-        }
-
-        //获取service bean.
-        userService = (UserService) context.getBean("userService");
-        userSayService = (UserSayService) context.getBean("userSayService");
-
-        //创建测试数据.
-        //createUserSayList();
-        //不级联查询.
-        getUserSayListByUser1();
-        //测试级联查询.
-        //getUserSayListByUser2();
-    }
-
     /**
      * 加载spring配置文件和log4j日志文件
      *
      * @return boolean
      */
-    public static boolean initEnv() {
+    @Test
+    public boolean initEnv() {
         try {
             context = new ClassPathXmlApplicationContext("spring/spring-core.xml");
             PropertyConfigurator.configure("src/main/resources/log4j.properties");
@@ -61,28 +45,36 @@ public class MainTest3 {
         }
     }
 
-    private static void createUserSayList() {
-        String userId = IdUtil.getId();
-        User user = new User(userId, "asso", "123456", true, new Date(), new Date(), UserType.COMMON);
-        userService.createUser(user);
-        List<UserSay> userSayList = new ArrayList<UserSay>();
-        for (int i = 0; i < 10; i++) {
-            UserSay userSay = new UserSay(IdUtil.getId(), userId, "title=" + i, new Date());
-            userSayList.add(userSay);
+    @Test
+    public void createUserSayList() {
+        try {
+            String userId = IdUtil.getId();
+            User user = new User(userId, "asso", "123456", true, new Date(), new Date(), UserType.COMMON);
+            userService.createUser(user);
+            List<UserSay> userSayList = new ArrayList<UserSay>();
+            for (int i = 0; i < 10; i++) {
+                UserSay userSay = new UserSay(IdUtil.getId(), userId, "title=" + i, new Date());
+                userSayList.add(userSay);
+            }
+            userSayService.createUserSayList(userSayList);
+            logger.info(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        userSayService.createUserSayList(userSayList);
-        logger.info(userId);
     }
 
-    private static void getUserSayListByUser1() {
+    @Test
+    public void getUserSayListByUser1() {
         userSayService.getUserSayListByUser1("093696d2c4234cae9ee7dbf3ff012fe5");
     }
 
-    private static void getUserSayListByUser2() {
+    @Test
+    public void getUserSayListByUser2() {
         userSayService.getUserSayListByUser1("093696d2c4234cae9ee7dbf3ff012fe5");
     }
 
-    private static void getUserSayListByUser3() {
+    @Test
+    public void getUserSayListByUser3() {
         userSayService.getUserSayListByUser2("093696d2c4234cae9ee7dbf3ff012fe5");
     }
 }

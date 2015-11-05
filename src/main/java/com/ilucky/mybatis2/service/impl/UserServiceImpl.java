@@ -18,7 +18,7 @@ import java.util.*;
  * @author IluckySi
  * @since 20151013
  */
-@Service("userService")
+@Service
 @Transactional(rollbackFor = Exception.class)
 class UserServiceImpl extends BaseServiceImpl implements UserService {
 
@@ -39,7 +39,6 @@ class UserServiceImpl extends BaseServiceImpl implements UserService {
         userMapper.createUser(user);
         result.put("result", "200");
         result.put("message", "创建成功");
-
     }
 
     public void createUserList(List<User> userList) {

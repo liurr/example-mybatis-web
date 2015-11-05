@@ -32,7 +32,11 @@ public class UserController {
                            @RequestParam(value = "birthday", required = true) String birthday,
                            @RequestParam(value = "userType", required = true) String userType) {
         logger.info("收到参数:name=" + name + ",password=" + password + ",sex=" + sex + ",birthday=" + birthday + ",userType=" + userType);
-        userService.createUser(response, name, password, sex, birthday, userType);
+        try {
+            userService.createUser(name, password, sex, birthday, userType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @RequestMapping("/modifyUser")
@@ -43,18 +47,23 @@ public class UserController {
                            @RequestParam(value = "birthday", required = true) String birthday,
                            @RequestParam(value = "userType", required = true) String userType) {
         logger.info("收到参数:id=" + id + ",name=" + name + ",password=" + password + ",sex=" + sex + ",birthday=" + birthday + ",userType=" + userType);
-        userService.modifyUser(response, id, name, password, sex, birthday, userType);
+        try {
+            userService.modifyUser(response, id, name, password, sex, birthday, userType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
     @RequestMapping("/deleteUser")
     public void modifyUser(HttpServletResponse response, @RequestParam(value = "id", required = true) String id) {
         logger.info("收到参数:id=" + id);
-        userService.deleteUser(response, id);
+        try {
+            userService.deleteUser(response, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    @RequestMapping("/getUserListByPage")
-    public void getUserListByPage(HttpServletResponse response) {
-        userService.getUserListByPage(response);
-    }
+
 }
